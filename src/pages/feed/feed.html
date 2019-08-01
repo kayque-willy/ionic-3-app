@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Feed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let filme of lista_filmes">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../assets/img/marty-avatar.jpg">
+      </ion-avatar>
+      <h2 class="feed-title">{{filme.original_title}}</h2>
+      <div class="feed-date">
+        <p>{{filme.release_date}}</p>
+      </div>
+    </ion-item>
+
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + filme.backdrop_path">
+
+    <ion-card-content>
+      <p>{{filme.overview}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{objeto_feed.likes}} Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{objeto_feed.comments}} Comments</div>
+        </button>
+      </ion-col>
+      <ion-col align-self-center text-center>
+        <ion-note>
+          {{objeto_feed.time_comment}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>
