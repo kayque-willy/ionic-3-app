@@ -9,15 +9,18 @@ export class AuthenticationProvider {
 
   constructor(
     private db: DatabaseProvider
-  ) { }
+  ) { 
+    this.authenticationState.next(true);
+  }
 
   login(user: User): any {
-    if (this.db.login(user)) {
-      this.authenticationState.next(true);
-      return true;
-    } else {
-      return false;
-    }
+    this.db.login(user)
+      .then((data) => {
+        this.authenticationState.next(true);
+        return true;
+      }, (error) => {
+        return false;
+      });
   }
 
   logout() {

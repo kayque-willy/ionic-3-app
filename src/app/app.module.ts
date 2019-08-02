@@ -1,3 +1,4 @@
+import { UsersPageModule } from './../pages/users/users.module';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -17,6 +18,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { FeedPage } from '../pages/feed/feed';
 import { LoginPage } from '../pages/login/login';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
+import { UsersPage } from '../pages/users/users';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
     IonicModule.forRoot(MyApp),
     FeedPageModule,
     LoginPageModule,
-    HttpClientModule
+    HttpClientModule,
+    UsersPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,7 +40,8 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
     HomePage,
     TabsPage,
     FeedPage,
-    LoginPage
+    LoginPage,
+    UsersPage
   ],
   providers: [
     StatusBar,

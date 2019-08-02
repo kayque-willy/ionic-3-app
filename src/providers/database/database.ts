@@ -77,6 +77,7 @@ export class DatabaseProvider {
         }
       }
       this.users.next(users);
+      console.log(users);
     });
   }
 
@@ -90,71 +91,66 @@ export class DatabaseProvider {
   }
 
   // retorna usuario pelo id
-  //getUser(id): Promise<User> {
-  // return this.database.executeSql('SELECT * FROM user WHERE id = ?', [id]).then(data => {
-  //   return {
-  //     id: data.rows.item(0).id,
-  //     name: data.rows.item(0).name,
-  //     email: data.rows.item(0).email,
-  //     password: data.rows.item(0).password,
-  //     img: data.rows.item(0).img
-  //   }
-  // });
-  //}
+  getUser(id): Promise<User> {
+  return this.database.executeSql('SELECT * FROM user WHERE id = ?', [id]).then(data => {
+    return {
+      id: data.rows.item(0).id,
+      name: data.rows.item(0).name,
+      email: data.rows.item(0).email,
+      password: data.rows.item(0).password,
+      img: data.rows.item(0).img
+    }
+  });
+  }
 
   //Verifica o login
   login(user: User): any {
     let data = [user.email, user.password];
-    this.database.executeSql('SELECT * FROM user WHERE email = ? and password = ?', data)
-      .then((data) => {
-        return true;
-      }, (error) => {
-        return false;
-      });
+    return this.database.executeSql('SELECT * FROM user WHERE email = ? and password = ?', data)
   }
 
   //remove usuario
   deleteUser(id) {
-    // return this.database.executeSql('DELETE FROM user WHERE id = ?', [id]).then(_ => {
-    //   console.log("Usuario removido com sucesso!");
-    //   this.loadUsers();
-    //   this.loadProducts();
-    // });
+    return this.database.executeSql('DELETE FROM user WHERE id = ?', [id]).then(_ => {
+      console.log("Usuario removido com sucesso!");
+      this.loadUsers();
+      this.loadProducts();
+    });
   }
 
   // atualiza usuario
   updateUser(user: User) {
-    // let data = [user.name, user.password, user.email, user.img];
-    // return this.database.executeSql(`UPDATE user SET name = ?, password = ?,  email = ?, img = ? WHERE id = ${user.id}`, data).then(data => {
-    //   this.loadUsers();
-    // })
+    let data = [user.name, user.password, user.email, user.img];
+    return this.database.executeSql(`UPDATE user SET name = ?, password = ?,  email = ?, img = ? WHERE id = ${user.id}`, data).then(data => {
+      this.loadUsers();
+    })
   }
 
   //CRUD DO PRODUTO
   //Carrega todos os produtos
   loadProducts() {
-    // let query = 'SELECT product.name, product.id, user.name AS creator FROM product JOIN user ON user.id = product.creatorId';
-    // return this.database.executeSql(query, []).then(data => {
-    //   let products = [];
-    //   if (data.rows.length > 0) {
-    //     for (var i = 0; i < data.rows.length; i++) {
-    //       products.push({
-    //         name: data.rows.item(i).name,
-    //         id: data.rows.item(i).id,
-    //         creator: data.rows.item(i).creator,
-    //       });
-    //     }
-    //   }
-    //   this.products.next(products);
-    // });
+    let query = 'SELECT product.name, product.id, user.name AS creator FROM product JOIN user ON user.id = product.creatorId';
+    return this.database.executeSql(query, []).then(data => {
+      let products = [];
+      if (data.rows.length > 0) {
+        for (var i = 0; i < data.rows.length; i++) {
+          products.push({
+            name: data.rows.item(i).name,
+            id: data.rows.item(i).id,
+            creator: data.rows.item(i).creator,
+          });
+        }
+      }
+      this.products.next(products);
+    });
   }
 
   //Adiciona um produto
   addProduct(name, creator) {
-    // let data = [name, creator];
-    // return this.database.executeSql('INSERT INTO product (name, creatorId) VALUES (?, ?)', data).then(data => {
-    //   this.loadProducts();
-    // });
+    let data = [name, creator];
+    return this.database.executeSql('INSERT INTO product (name, creatorId) VALUES (?, ?)', data).then(data => {
+      this.loadProducts();
+    });
   }
 
   getDatabaseState() {

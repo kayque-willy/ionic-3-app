@@ -13,8 +13,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 export class MyApp {
   @ViewChild('nav') navCtrl: NavController
-  rootPage:any = LoginPage;
-  // rootPage:any = TabsPage;
+  // rootPage:any = LoginPage;
+  rootPage:any = TabsPage;
 
   constructor(
     platform: Platform, 
