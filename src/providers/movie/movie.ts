@@ -10,8 +10,8 @@ export class MovieProvider {
     public http: HttpClient) {
   }
 
-  getLatesMovies(){
+  getLatesMovies() {
     return this.http.get(this.api_path + "movie/popular" + this.api_key);
-}
+  }
 
 }

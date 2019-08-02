@@ -1,0 +1,17 @@
+> $ ionic start myApp tabs --type=ionic-angular   //--------------// Inicia um app com IONIC 3
+
+> $ ionic cordova platform add android   //--------------------// Adiciona a plataforma android
+
+> $ ionic serve   //------------------// Inicia o node.js local
+
+> $ ionic cordova build android   //--------------// Gera o .apk
+
+> $ ionic cordova run android --list    //----------------// Lista dispostivos fisicos e virtuais
+
+> $ ionic cordova run android --target=14ba0811   // ------------------// Executa aplicação no dispositivo
+
+> $ ionic cordova run android --device -l --debug  // ------------------// Executa aplicação com debug
+
+> $ ionic cordova plugin add cordova-sqlite-storage // ------------------// Instalação do SQLITE
+
+> $ npm install --save @ionic-native/sqlite@4 // ------------------// Instalação do SQLITE
