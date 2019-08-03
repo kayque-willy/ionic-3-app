@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Edição de usuário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+     <div *ngIf="user">
+      <ion-item>
+        <ion-label position="stacked">Novo nome:</ion-label>
+        <ion-input [(ngModel)]="user.name" placeholder="Nome"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Novo email:</ion-label>
+        <ion-input [(ngModel)]="user.email" placeholder="Email"></ion-input>
+      </ion-item>
+      <button ion-button expand="block" (click)="updateUser()">Atualizar</button>
+      <button ion-button expand="block" (click)="delete()">Apagar</button>
+    </div>
+</ion-content>

@@ -30,8 +30,7 @@ export class DatabaseProvider {
       this.sqlite.create({
         name: 'users.db',
         location: 'default'
-      })
-      .then((db: SQLiteObject) => {
+      }).then((db: SQLiteObject) => {
         this.database = db;
         this.seedDatabase();
         this.loadUsers();
@@ -41,23 +40,33 @@ export class DatabaseProvider {
 
   //Preenche o banco de dados
   seedDatabase() {
-    // this.database .sqlBatch([
-    //   ['CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT,  password TEXT, img TEXT);']
-    // ])
-    //   .then(() => console.log('tabelas criadas'))
-    //   .catch(e => console.error(e));
+    this.database .sqlBatch([
+      ['CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT,  password TEXT, img TEXT);'],
+      ['CREATE TABLE IF NOT EXISTS product( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, creatorId INTEGER);'],
+      ['INSERT or IGNORE INTO user (id, name, email, password, img) VALUES (1, \'Simon\', \'email1@email.com\', \'123\', \'https://pbs.twimg.com/profile_images/858987821394210817/oMccbXv6_bigger.jpg\');'],
+      ['INSERT or IGNORE INTO user (id, name, email, password, img) VALUES (2, \'Max\', \'email2@email.com\', \'123\', \'https://pbs.twimg.com/profile_images/953978653624455170/j91_AYfd_400x400.jpg\');'],
+      ['INSERT or IGNORE INTO user (id, name, email, password, img) VALUES (3, \'Ben\', \'email3@email.com\', \'123\', \'https://pbs.twimg.com/profile_images/1060037170688417792/vZ7iAWXV_400x400.jpg\');'],
+      ['INSERT or IGNORE INTO product(id, name, creatorId) VALUES (1, \'Ionic Academy\', 1);\');'],
+      ['INSERT or IGNORE INTO product(id, name, creatorId) VALUES (2, \'Software Startup Manual\', 1);'],
+      ['INSERT or IGNORE INTO product(id, name, creatorId) VALUES (3, \'Ionic Framework\', 2);'],
+      ['INSERT or IGNORE INTO product(id, name, creatorId) VALUES (4, \'Drifty Co\', 2);'],
+      ['INSERT or IGNORE INTO product(id, name, creatorId) VALUES (5, \'Drifty Co\', 3);']
+    ]).then(_ => {
+      this.dbReady.next(true);
+      console.log("Banco criado com sucesso!");
+    }).catch(e => console.error(e));
+    this.loadUsers();
+    this.loadProducts();
 
-    this.http.get('assets/seed.sql', { responseType: 'text' })
-      .subscribe(sql => {
-        this.database.executeSql(sql, [])
-          .then(_ => {
-            this.loadUsers();
-            this.loadProducts();
-            this.dbReady.next(true);
-            console.log("Banco criado com sucesso!");
-          })
-          .catch(e => console.error(e));
-      });
+    // this.http.get('assets/seed.sql', { responseType: 'text' })
+    //   .subscribe(sql => {
+    //     this.database.executeSql(sql, []).then(_ => {
+    //         this.loadUsers();
+    //         this.loadProducts();
+    //         this.dbReady.next(true);
+    //         console.log("Banco criado com sucesso!");
+    //       }).catch(e => console.error(e));
+    //   });
   }
 
   //CRU DO USUARIO
@@ -77,8 +86,7 @@ export class DatabaseProvider {
         }
       }
       this.users.next(users);
-      console.log(users);
-    });
+    }).catch(e => console.error(e));
   }
 
   // adiciona usuario
@@ -87,7 +95,7 @@ export class DatabaseProvider {
     return this.database.executeSql('INSERT INTO user (name, email, password, img) VALUES (?, ?, ?, ?)', data).then(data => {
       console.log("Usuario adicionado com sucesso!");
       this.loadUsers();
-    });
+    }).catch(e => console.error(e));
   }
 
   // retorna usuario pelo id
@@ -106,7 +114,7 @@ export class DatabaseProvider {
   //Verifica o login
   login(user: User): any {
     let data = [user.email, user.password];
-    return this.database.executeSql('SELECT * FROM user WHERE email = ? and password = ?', data)
+    return this.database.executeSql('SELECT * FROM user WHERE email = ? and password = ?', data);
   }
 
   //remove usuario
@@ -115,7 +123,7 @@ export class DatabaseProvider {
       console.log("Usuario removido com sucesso!");
       this.loadUsers();
       this.loadProducts();
-    });
+    }).catch(e => console.error(e));
   }
 
   // atualiza usuario
@@ -123,7 +131,7 @@ export class DatabaseProvider {
     let data = [user.name, user.password, user.email, user.img];
     return this.database.executeSql(`UPDATE user SET name = ?, password = ?,  email = ?, img = ? WHERE id = ${user.id}`, data).then(data => {
       this.loadUsers();
-    })
+    }).catch(e => console.error(e));;
   }
 
   //CRUD DO PRODUTO
@@ -142,7 +150,7 @@ export class DatabaseProvider {
         }
       }
       this.products.next(products);
-    });
+    }).catch(e => console.error(e));
   }
 
   //Adiciona um produto
@@ -150,7 +158,7 @@ export class DatabaseProvider {
     let data = [name, creator];
     return this.database.executeSql('INSERT INTO product (name, creatorId) VALUES (?, ?)', data).then(data => {
       this.loadProducts();
-    });
+    }).catch(e => console.error(e));
   }
 
   getDatabaseState() {

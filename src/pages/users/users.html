@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-
+  <!-- Menu do switch -->
   <ion-segment [(ngModel)]="selectedView">
     <ion-segment-button value="users">
       <ion-label>Usuários</ion-label>
@@ -14,24 +14,28 @@
       <ion-label>Produtos</ion-label>
     </ion-segment-button>
   </ion-segment>
+  <!-- Menu do switch -->
 
+  <!-- Componente switch -->
   <div [ngSwitch]="selectedView">
     <!-- Aba dos usuários -->
     <ion-list *ngSwitchCase="'users'">
+      <!-- Menu Usuario -->
       <ion-item>
-        <ion-label position="stacked">Nome?</ion-label>
+        <ion-label position="stacked">Nome:</ion-label>
         <br>
         <ion-input [(ngModel)]="user.name" placeholder="Nome"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Email?</ion-label>
+        <ion-label position="stacked">Email:</ion-label>
         <br>
         <ion-input [(ngModel)]="user.email" placeholder="Email"></ion-input>
       </ion-item>
       <button ion-button expand="block" (click)="addUser()">Adicionar usuário</button>
-
+      <!-- Menu Usuario -->
+      <!-- Lista de usuarios -->
       <ion-list>
-        <ion-item button *ngFor="let user of users">
+        <ion-item button *ngFor="let user of users" (click)="goToUser(user)">
           <ion-thumbnail item-start>
             <img [src]="user.img">
           </ion-thumbnail>
@@ -40,25 +44,28 @@
           </ion-label>
         </ion-item>
       </ion-list>
+      <!-- Lista de usuarios -->
     </ion-list>
     <!-- Aba dos usuários -->
 
     <!-- Aba dos produtos -->
     <ion-list *ngSwitchCase="'products'">
+      <!-- Menu Produto-->
       <ion-item>
-        <ion-label position="stacked">Nome do produto?</ion-label>
+        <ion-label position="stacked">Nome do produto:</ion-label>
         <br>
         <ion-input [(ngModel)]="product.name" placeholder="Nome"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Criador?</ion-label>
+        <ion-label position="stacked">Criador:</ion-label>
         <br>
         <ion-select [(ngModel)]="product.creator">
           <ion-option *ngFor="let user of users" [value]="user.id">{{ user.name }}</ion-option>
         </ion-select>
       </ion-item>
       <button ion-button expand="block" (click)="addProduct()">Adicionar produto</button>
-
+      <!-- Menu Produto-->
+      <!-- Lista de produtos -->
       <ion-list>
         <ion-item *ngFor="let prod of products | async">
           <ion-label>
@@ -67,9 +74,9 @@
           </ion-label>
         </ion-item>
       </ion-list>
-
+      <!-- Lista de produtos -->
     </ion-list>
     <!-- Aba dos produtos -->
-
   </div>
+  <!-- Componente switch -->
 </ion-content>

@@ -47,7 +47,6 @@ export class LoginPage {
   ionViewDidLoad() { }
 
   segmentChanged(event: any) {
-    console.log(event);
     if (event.value == "login") {
       this.slides.slidePrev();
       this.wavesPosition += this.wavesDiference;
