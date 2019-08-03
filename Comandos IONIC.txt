@@ -1,3 +1,5 @@
+> $ npm install -g ionic cordova //--------------// Instala√ß√£o do IONIC e CORDOVA
+
 > $ ionic start myApp tabs --type=ionic-angular   //--------------// Inicia um app com IONIC 3
 
 > $ ionic cordova platform add android   //--------------------// Adiciona a plataforma android
@@ -8,10 +10,10 @@
 
 > $ ionic cordova run android --list    //----------------// Lista dispostivos fisicos e virtuais
 
-> $ ionic cordova run android --target=14ba0811   // ------------------// Executa aplicaÁ„o no dispositivo
+> $ ionic cordova run android --target=14ba0811   // ------------------// Executa aplica√ß√£o no dispositivo
 
-> $ ionic cordova run android --device -l --debug  // ------------------// Executa aplicaÁ„o com debug
+> $ ionic cordova run android --device -l --debug  // ------------------// Executa aplica√ß√£o com debug
 
-> $ ionic cordova plugin add cordova-sqlite-storage // ------------------// InstalaÁ„o do SQLITE
+> $ ionic cordova plugin add cordova-sqlite-storage // ------------------// Instala√ß√£o do SQLITE
 
-> $ npm install --save @ionic-native/sqlite@4 // ------------------// InstalaÁ„o do SQLITE
+> $ npm install --save @ionic-native/sqlite@4 // ------------------// Instala√ß√£o do SQLITE
