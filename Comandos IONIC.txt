@@ -17,3 +17,5 @@
 > $ ionic cordova plugin add cordova-sqlite-storage // ------------------// Instalação do SQLITE
 
 > $ npm install --save @ionic-native/sqlite@4 // ------------------// Instalação do SQLITE
+
+> $ npm install -g cordova@8.1.2 // ------------------// Instalação do cordova
