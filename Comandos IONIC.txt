@@ -5,6 +5,7 @@
 
 > $ ionic cordova platform add android   //--------------------// Adiciona a plataforma android no CORDOVA
 
+---------------------------------------------------------------------------------------------------------
 > $ npm install --save @ionic-native/sqlite@4 // ------------------// Instalação do SQLITE
 
 > $ ionic cordova plugin add cordova-sqlite-storage // ------------------// Instalação do SQLITE no CORDOVA
